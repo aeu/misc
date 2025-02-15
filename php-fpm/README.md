@@ -1,10 +1,13 @@
 ## PHP-FPM heartbeat
 
-I noticed on my servers that php-fpm would stop responding to requests, but it wasn't actually dead.  After looking around
-I found that people were asking about this on StackOverflow.
+I noticed on my servers that php-fpm would stop responding to
+requests, but it wasn't actually dead.  After looking around I found
+that people were asking about this on StackOverflow, so apparently
+it's a thing.
 
-The reason this is happening is that php-fpm maxes out pools, but keeps running.  You think its alive,
-but it isnt.  If you do a systemctl status php-fpm you get something back that looks like this:
+The reason this is happening is that php-fpm maxes out pools, but
+keeps running.  You think its alive, but it isnt.  If you do a
+systemctl status php-fpm you get something back that looks like this:
 
      # systemctl status php-fpm
      ● php-fpm.service - The PHP FastCGI Process Manager
@@ -60,4 +63,6 @@ but it isnt.  If you do a systemctl status php-fpm you get something back that l
                   ├─468320 "php-fpm: pool www"
 
 
-So I wrote a script that counts the pools and restarts so that my servers don't die.
+So I wrote a script that counts the pools and restarts so that my
+servers don't die.  I also posted my response on StackOverflow.  Now
+to see if Cunningham's Law is proven.
